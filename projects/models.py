@@ -28,8 +28,8 @@ class Project (models.Model):
         return self.title
 
 class Task (models.Model):
-    description =models.TextField ()
-    is_completed = models.BinaryField (default=False)
+    description = models.TextField ()
+    is_completed = models.BooleanField (default=False)
     project = models.ForeignKey (Project, on_delete=models.CASCADE)
 
     def __str__(self):
