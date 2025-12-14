@@ -12,23 +12,50 @@
         </li>
 
       </ul>
-      <form method="get" action="{% url 'project_list' %}" class="d-flex">
-        <div class="input-group">
-          <input
-                  type="text"
-                  name="q"
-                  class="form-control"
-                  placeholder="{% trans 'Search' %}"
-                  value="{{request.GET.q}}" <!-- دور هذا السطر هو الحفاظ على الكلمة المبحوث عنها في مربع البحث-->
+      <!--      أضفنا هذا الشرط لكي لا يظهر مربع البحث في صفحة تسجيل الدخول-->
 
-          >
-          <button class="btn btn-outline-light" type="submit">
-            <i class="bi bi-search"></i>
+      {% if user.is_authenticated %}
+          <ul class="navbar-nav mb-2 mb-lg-0 me-3">
 
-          </button>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{user.username}}
+              </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">{% trans 'Profile' %}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item">{% trans 'Logout' %}</button>
+              </form>
+            </li>
 
-        </div>
-      </form>
+          </ul>
+            </li>
+          </ul>
+        <form method="GET" action="{% url 'project_list' %}" class="d-flex">
+          <div class="input-group">
+            <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="{% trans 'Search' %}"
+                    value="{{request.GET.q}}">
+            <!-- دور هذا السطر هو الحفاظ على الكلمة المبحوث عنها في مربع البحث-->
+
+
+            <button class="btn btn-outline-light" type="submit">
+              <i class="bi bi-search"></i>
+
+            </button>
+
+          </div>
+        </form>
+      {% else %}
+        <a class="btn btn-outline-light" href="{% url 'login' %}">{% trans 'Login' %}</a>
+      {% endif %}
+
 
     </div>
   </div>
