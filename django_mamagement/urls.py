@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 import debug_toolbar
+from django.utils.translation import gettext as _
+
+#نعدل عنوان لوحة إدارة الموقع
+admin.site.site_header = _('project management')
+#نعدل عنوان الصفحة
+admin.site.site_title = _('project management')
 
 urlpatterns = [
     path ('__debug__/', include(debug_toolbar.urls)),
