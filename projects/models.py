@@ -9,6 +9,10 @@ class Category (models.Model):
 
     def __str__(self):
         return self.name
+    #هذا التصنيف الفرعي دوره ترجمة هذه الخاصية في لوحة التحكم
+    class Meta:
+        verbose_name = _('category')
+        verbose_name_plural = _('category')
 
 class ProjectStatus (models.IntegerChoices):
     PENDING = 1, _('Pending')
@@ -30,6 +34,11 @@ class Project (models.Model):
     def __str__(self):
         return self.title
 
+        # هذا التصنيف الفرعي دوره ترجمة هذه الخاصية في لوحة التحكم
+    class Meta:
+        verbose_name = _('Project')
+        verbose_name_plural = _('Project')
+
 class Task (models.Model):
     description = models.TextField ()
     is_completed = models.BooleanField (default=False)
@@ -37,4 +46,9 @@ class Task (models.Model):
 
     def __str__(self):
         return self.description
+
+        # هذا التصنيف الفرعي دوره ترجمة هذه الخاصية في لوحة التحكم
+    class Meta:
+        verbose_name = _('Task')
+        verbose_name_plural = _('Task')
 
